@@ -1,8 +1,21 @@
 <?php
-
-  class time{
-
-    public function Time_Ago($time_ago) {
+/**
+ * Malik Corporation private limited
+ *
+ * @package   (my-mos.com)
+ * @author    Malik Umer Farooq<admin@my-mos.com>
+ * @copyright 2016-2017 Malik Corporation private limited
+ * @license  Malik Corporation private limited https://my-mos.com/public/terms
+ * @link     https://my-mos.com/public/
+ */
+class Time
+{
+		/**
+		 * Convert timespam to human readable form
+		 * @time_ago time(); or come form db for return human readable form 
+		 * @return string
+		*/	 
+	public function MalikTimeAgo($time_ago) {
         $time_ago =  strtotime($time_ago) ? strtotime($time_ago) : $time_ago;
         $time  = time() - $time_ago;
        switch($time):
@@ -30,10 +43,42 @@
 
         endswitch;
       }
-
-    public function maliknormalTime($time){
-      $str = strtotime($time);
-      return date("d-F-Y h:i:s a", $str);
+		/**
+		 * For normal time
+		 * normal time print/look like 01-October-2017 07:56:43 AM
+		*/	  
+    public function MalikNormalTime($params = []){
+        if(is_array($params)){
+            if(!empty($params['timezone'])){
+                 date_default_timezone_set($params['timezone']);
+            }
+        }
+      return date("d-F-Y h:i:s A");
     }
+        /**
+         * Calculate execution time of script
+         * @param $params (array)
+         * 'start' => microtime(true); required for startimg time
+         * 'end' => microtime(true); required for ending time
+         * 'round' optional if you want round 'round'=>2 e.g or whatever 
+         * you want not set this return full float value
+         * @return float
+        */      
+    public function MalikExecutionTime($params){
+        if(is_array($params)){
+            if(!empty($params['start'])){
+                $startTime = $params['start'];
+            }if(!empty($params['end'])){
+                $endTime = $params['end'];
+            }
+             $ExecutionTime = $endTime - $startTime;
+                  if(!empty($params['round'])){
+                        $ExecutionTime = round($ExecutionTime,$params['round']);
+                 }
+             return (float) $ExecutionTime;
+        }else{
+            return false;
+        }
+    }
+}
 
-  }
