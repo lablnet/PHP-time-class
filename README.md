@@ -1,3 +1,5 @@
+> This class has been Deprecated you can try now https://github.com/Lablnet/PHP-Formats-Class
+
 # PHP-time-class
 
 ## Feature
